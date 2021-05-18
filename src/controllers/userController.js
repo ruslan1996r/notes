@@ -5,8 +5,8 @@ class UserController {
     try {
       const data = req.body
       const createdUser = await User(data).save()
-      const token = await User.generateToken(createdUser)
-      res.status(200).send({ createdUser, token })
+      const token = await createdUser.generateToken(createdUser)
+      return res.status(200).send({ createdUser, token })
     } catch (e) {
       console.log("register: ", e)
       return res.status(500).send(e)
