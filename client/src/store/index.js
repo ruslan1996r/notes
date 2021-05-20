@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import auth from "./auth"
+import note from "./note"
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    user: null,
-    isAuth: false
-  },
-  getters: {
-    getUser: state => state.user
+  modules: {
+    auth,
+    note
   }
 })

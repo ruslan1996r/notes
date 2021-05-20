@@ -5,17 +5,37 @@ class AuthApi extends Api {
     super()
   }
 
-  test() {
-    this.Axios.get('/todos/1')
-      .then(res => console.log("res", res.data))
+  login = async (user) => {
+    const result = await this.Axios.post('/user/login', user)
+    if (result.data.token) this.token = result.data.token
+
+    return {
+      data: result.data,
+      status: result.status
+    }
   }
 
-  login() {
-    return
+  register = async (user) => {
+    const result = await this.Axios.post('/user/register', user)
+    if (result.data.token) this.token = result.data.token
+
+    return {
+      data: result.data,
+      status: result.status
+    }
   }
 
-  register() {
-    return
+  getMe = async () => {
+    const result = await this.Axios.get('/user', { headers: this.headers })
+    if (result.data.token) this.token = result.data.token
+    return {
+      data: result.data,
+      status: result.status
+    }
+  }
+
+  logout = () => {
+    this.token = ''
   }
 }
 

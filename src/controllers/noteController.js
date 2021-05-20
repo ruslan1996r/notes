@@ -27,6 +27,16 @@ class NoteController {
 			return res.status(500).send(e)
 		}
 	}
+	getOne = async (req, res) => {
+		try {
+			const { id } = req.params
+			const result = await Note.findById(id)
+			return res.status(200).send(result)
+		} catch (e) {
+			console.log("getOne: ", e)
+			return res.status(500).send(e)
+		}
+	}
 	delete = async (req, res) => {
 		try {
 			const { id } = req.params
@@ -42,13 +52,14 @@ class NoteController {
 			const { id } = req.params
 			const data = req.body
 			const file = req.file
+			console.log("file", file)
 
 			const updatedNote = await Note.findByIdAndUpdate(id, {
 				text: data.text,
 				done: data.done,
 				image: `/uploads/${file.filename}`
 			})
-			
+
 			return res.status(200).send({ updatedNote })
 		} catch (e) {
 			console.log("update: ", e)

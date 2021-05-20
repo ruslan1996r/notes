@@ -1,25 +1,34 @@
 <template>
-  <AuthForm @method="login" pageType="Login" redirect="Registration" />
+  <AuthForm
+    v-if="!isLoading"
+    @method="login"
+    pageType="Login"
+    redirect="Registration"
+  />
+  <Preloader v-else />
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import AuthForm from "../components/AuthForm.vue";
-import AuthApi from "../api/auth";
+import Preloader from "../components/Preloader.vue";
 export default {
   name: "Login",
   components: {
     AuthForm,
+    Preloader,
   },
   computed: {
-    testStore() {
-      return this.$store.getters.getUser;
-    },
+    ...mapGetters(["isLoading"]),
   },
   methods: {
+    ...mapActions(["ACTION_login", "ACTION_set_user"]),
     login(form) {
-      AuthApi.test();
-      console.log("login data", form, console.log("testStore", this.testStore));
+      this.ACTION_login(form);
     },
+  },
+  mounted() {
+    this.ACTION_set_user();
   },
 };
 </script>

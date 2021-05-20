@@ -19,7 +19,7 @@ const opts = {
                 warning: colors.amber.base,
                 error: colors.deepOrange.accent4,
                 success: colors.green.accent3,
-                successDarken: '#00bc60',
+                successDarken: '#00a052',
                 darkenText: '#212121'
             }
         }

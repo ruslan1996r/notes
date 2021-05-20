@@ -1,4 +1,4 @@
-const { Schema, Types, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const noteSchema = Schema({
 	text: {
@@ -11,6 +11,10 @@ const noteSchema = Schema({
 	done: {
 		type: Boolean,
 		default: false
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now()
 	}
 })
 
